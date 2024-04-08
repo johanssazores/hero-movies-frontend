@@ -1,35 +1,25 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import { useDispatch } from "react-redux";
+import { login } from "../redux/actions/authActions";
+import { useRouter } from "next/navigation";
 const Login = () => {
-  const [login, setLogin] = useState({
+  const router = useRouter();
+  const [loginState, setLoginState] = useState({
     username: "",
     password: "",
-  });
+  }) as any;
   const [mounted, setMounted] = useState(false);
   useEffect(() => {
     setMounted(true);
   }, []);
 
-  const SubmitLogin = async (e: any) => {
+  const dispatch = useDispatch();
+
+  const handleLogin = (e: any) => {
     e.preventDefault();
-    try {
-      const requestLogin = await axios.post("/api/login", {
-        username: login.username,
-        password: login.password,
-      });
-
-      const responseLogin = requestLogin.data;
-
-      console.log(responseLogin);
-
-      if (responseLogin.success !== 1) {
-        return;
-      }
-    } catch (err) {
-      console.error(err);
-    } finally {
-    }
+    dispatch(login(loginState.username, loginState.password));
+    router.push("/movies");
   };
 
   return (
@@ -41,7 +31,7 @@ const Login = () => {
           </h2>
         </div>
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form className="space-y-6" onSubmit={SubmitLogin}>
+          <form className="space-y-6" onSubmit={handleLogin}>
             <div>
               <label
                 htmlFor="username"
@@ -57,7 +47,7 @@ const Login = () => {
                   autoComplete="username"
                   className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   onChange={(e) =>
-                    setLogin({ ...login, username: e.target.value })
+                    setLoginState({ ...loginState, username: e.target.value })
                   }
                   required
                 />
@@ -80,7 +70,7 @@ const Login = () => {
                   autoComplete="current-password"
                   className="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   onChange={(e) =>
-                    setLogin({ ...login, password: e.target.value })
+                    setLoginState({ ...loginState, password: e.target.value })
                   }
                   required
                 />
