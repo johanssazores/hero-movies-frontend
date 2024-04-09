@@ -20,7 +20,9 @@ const fetchMovies = async (
 
 const fetchMovie = async (movieId: string, token: any): Promise<any> => {
   try {
-    const response = await fetch(`/api/movie/${movieId}?token=${token}`);
+    const response = await fetch(
+      `/api/movie/?movieId=${movieId}&token=${token}`
+    );
     const data = await response.json();
     return data;
   } catch (error) {

@@ -7,16 +7,16 @@ const Menu = () => {
     <div className="flex items-center justify-between border-b border shadow-lg py-6 px-8">
       <h1 className="font-bold text-2xl">Hero Movies</h1>
 
-      <ul className="flex">
+      <ul className="flex items-center justify-end">
         {session ? (
-          <li>
-            <Button onClick={() => signOut()} className="px-2">
-              Logout
-            </Button>
-          </li>
+          <>
+            <li className="px-2">
+              <Button onClick={() => signOut()}>Logout</Button>
+            </li>
+          </>
         ) : (
-          <li>
-            <Button anchor={true} href="/" className="px-2">
+          <li className="px-2">
+            <Button anchor={true} href="/">
               Login
             </Button>
           </li>

@@ -1,7 +1,12 @@
-import { FETCH_MOVIES, SET_PAGE } from "@/redux/actions/movieActions";
+import {
+  FETCH_MOVIES,
+  FETCH_MOVIE,
+  SET_PAGE,
+} from "@/redux/actions/movieActions";
 
 const initialState = {
   movies: [],
+  movie: {},
   currentPage: 1,
   totalPages: 1,
 };
@@ -13,6 +18,11 @@ const movieReducer = (state = initialState, action: any) => {
         ...state,
         movies: action.payload.movies,
         totalPages: action.payload.totalPages,
+      };
+    case FETCH_MOVIE:
+      return {
+        ...state,
+        movie: action.payload.movie,
       };
     case SET_PAGE:
       return {

@@ -14,7 +14,7 @@ const Pagination: React.FC = () => {
   };
 
   return (
-    <div className="flex mt-4 justify-end">
+    <div className="flex mt-2 pb-10 justify-center">
       {Array.from({ length: totalPages }, (_, i) => (
         <div className="mr-2 border px-4 py-2 rounded-lg shadow-lg" key={i}>
           <button

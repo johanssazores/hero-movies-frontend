@@ -1,11 +1,9 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { signIn } from "next-auth/react";
-import { useRouter } from "next/navigation";
 import Loader from "@/components/Loader";
 import Button from "@/components/Button";
 const Login = () => {
-  const router = useRouter();
   const [loginState, setLoginState] = useState({
     username: "",
     password: "",
@@ -40,7 +38,7 @@ const Login = () => {
       });
 
       if (loginUser?.ok) {
-        setInterval(() => router.push("/movies"), 3000);
+        window.location.href = "/movies";
         return;
       } else {
         setIsError("Something is wrong with your Login Details");
