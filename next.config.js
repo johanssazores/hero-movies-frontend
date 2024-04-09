@@ -1,6 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   async headers() {
+    const allowedOrigins = ['http://localhost:3000'];
+
     return [
       {
         source: "/api/:path*",
@@ -8,7 +10,7 @@ const nextConfig = {
           { key: "Access-Control-Allow-Credentials", value: "true" },
           {
             key: "Access-Control-Allow-Origin",
-            value: process.env.ALLOW_ORIGIN_DOMAIN || "",
+            value: process.env.ALLOW_ORIGIN_DOMAIN && allowedOrigins.includes(process.env.ALLOW_ORIGIN_DOMAIN) ? process.env.ALLOW_ORIGIN_DOMAIN : "",
           },
           {
             key: "Access-Control-Allow-Methods",
