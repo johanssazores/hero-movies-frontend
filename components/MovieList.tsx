@@ -8,18 +8,18 @@ import Card from "@/components/Card";
 import Pagination from "@/components/Pagination";
 import Link from "next/link";
 import { IoIosHeartEmpty, IoMdHeart } from "react-icons/io";
-
+import { useSession } from "next-auth/react";
 const MovieList: React.FC = () => {
+  const { data: session } = useSession() as any;
   const [likedMovies, setLikedMovies] = useState([]) as any;
-
   const dispatch = useDispatch();
   const { movies, currentPage } = useSelector(
     (state: RootState) => state.movies
   );
 
   useEffect(() => {
-    dispatch(fetchMovies(currentPage));
-  }, [dispatch, currentPage]);
+    dispatch(fetchMovies(currentPage, session?.user?.token));
+  }, [dispatch, currentPage, session?.user?.token]);
 
   useEffect(() => {
     const storedLikedMovies =

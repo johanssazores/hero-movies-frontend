@@ -1,8 +1,8 @@
 const fetchMovies = async (
-  page: number
+  page: number,
+  token: any
 ): Promise<{ movies: any[]; totalPages: number }> => {
   try {
-    const token = localStorage.getItem("heroMoviesToken");
     const response = await fetch(
       `/api/movies/?paged=${page}&posts_per_page=10&token=${token}`
     );
@@ -18,9 +18,8 @@ const fetchMovies = async (
   }
 };
 
-const fetchMovie = async (movieId: string): Promise<any> => {
+const fetchMovie = async (movieId: string, token: any): Promise<any> => {
   try {
-    const token = localStorage.getItem("heroMoviesToken");
     const response = await fetch(`/api/movie/${movieId}?token=${token}`);
     const data = await response.json();
     return data;

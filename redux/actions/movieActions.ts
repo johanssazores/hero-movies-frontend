@@ -5,8 +5,8 @@ export const FETCH_MOVIES = "FETCH_MOVIES";
 export const SET_PAGE = "SET_PAGE";
 
 export const fetchMovies: any =
-  (page: number) => async (dispatch: Dispatch) => {
-    const movies = await fetchMoviesApi(page);
+  (page: number, token: any) => async (dispatch: Dispatch) => {
+    const movies = await fetchMoviesApi(page, token);
     dispatch({ type: FETCH_MOVIES, payload: movies });
   };
 

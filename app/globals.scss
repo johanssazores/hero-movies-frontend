@@ -1,3 +1,38 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.exid-spinner {
+  display: flex;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(2, 2, 2, 0.347);
+  border-color: #ddd;
+  color: #6366f1;
+  z-index: 999999999;
+}
+
+.exid-spinner::before {
+  content: "";
+  box-sizing: border-box;
+  width: 10em;
+  height: 10em;
+  border: 0.4em solid #ddd;
+  border-top: 0.4em solid currentColor;
+  border-radius: 50%;
+  animation: spin 0.75s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
