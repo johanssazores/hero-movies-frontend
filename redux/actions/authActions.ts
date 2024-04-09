@@ -1,5 +1,5 @@
 import { Dispatch } from "redux";
-import { login as loginApi } from "@/services/authService";
+import { login as loginApi, verifyToken } from "@/services/authService";
 
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const LOGOUT = "LOGOUT";
@@ -18,7 +18,17 @@ export const logout = () => (dispatch: Dispatch) => {
   dispatch({ type: LOGOUT });
 };
 
-export const authenticateWithToken =
-  (token: string) => (dispatch: Dispatch) => {
-    dispatch({ type: LOGIN_SUCCESS });
-  };
+export const authenticateWithToken = () => async (dispatch: Dispatch) => {
+  const token = localStorage.getItem("heroMoviesToken");
+  if (token) {
+    try {
+      await verifyToken(token);
+      dispatch({ type: LOGIN_SUCCESS });
+    } catch (error) {
+      localStorage.removeItem("heroMoviesToken");
+      dispatch({ type: LOGOUT });
+    }
+  } else {
+    dispatch({ type: LOGOUT });
+  }
+};

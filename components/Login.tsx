@@ -19,7 +19,7 @@ const Login = () => {
   const handleLogin = (e: any) => {
     e.preventDefault();
     dispatch(login(loginState.username, loginState.password));
-    router.push("/movies");
+    setInterval(() => router.push("/movies"), 3000);
   };
 
   return (

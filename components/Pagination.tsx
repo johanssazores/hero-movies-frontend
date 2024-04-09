@@ -1,4 +1,3 @@
-// components/Pagination.tsx
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../redux/store";
@@ -15,11 +14,16 @@ const Pagination: React.FC = () => {
   };
 
   return (
-    <div>
+    <div className="flex mt-4 justify-end">
       {Array.from({ length: totalPages }, (_, i) => (
-        <button key={i} onClick={() => handlePageChange(i + 1)}>
-          {i + 1}
-        </button>
+        <div className="mr-2 border px-4 py-2 rounded-lg shadow-lg" key={i}>
+          <button
+            onClick={() => handlePageChange(i + 1)}
+            className={`${currentPage === i + 1 && "font-bold"}`}
+          >
+            {i + 1}
+          </button>
+        </div>
       ))}
     </div>
   );
