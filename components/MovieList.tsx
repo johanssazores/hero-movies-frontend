@@ -46,7 +46,15 @@ const MovieList: React.FC = () => {
                   </div>
                   <div className="mt-2 flex items-center justify-between">
                     <button
-                      onClick={() => toggleLike(movie.id, userId)}
+                      onClick={() =>
+                        toggleLike(
+                          movie.id,
+                          userId,
+                          movie.title,
+                          movie.description,
+                          movie.year
+                        )
+                      }
                       className="text-indigo-600 text-2xl"
                     >
                       {likedMovies.some(

@@ -9,7 +9,13 @@ export const useLikedMovies = () => {
     setLikedMovies(storedLikedMovies);
   }, []);
 
-  const toggleLike = (movieId: any, userId: any) => {
+  const toggleLike = (
+    movieId: any,
+    userId: any,
+    title: any,
+    description: any,
+    year: any
+  ) => {
     let updatedLikedMovies = [] as any;
     const likedMovieIndex = likedMovies.findIndex(
       (likedMovie: any) => likedMovie.movieId === movieId
@@ -22,12 +28,21 @@ export const useLikedMovies = () => {
     } else {
       updatedLikedMovies = [
         ...likedMovies,
-        { movieId: movieId, userId: userId },
+        { movieId: movieId, userId: userId, title: title, description, year },
       ];
     }
     setLikedMovies(updatedLikedMovies);
     localStorage.setItem("likedMovies", JSON.stringify(updatedLikedMovies));
   };
 
-  return { likedMovies, toggleLike };
+  const removeLike = (movieId: any, userId: any) => {
+    const updatedLikedMovies = likedMovies.filter(
+      (likedMovie: any) =>
+        likedMovie.movieId !== movieId || likedMovie.userId !== userId
+    );
+    setLikedMovies(updatedLikedMovies);
+    localStorage.setItem("likedMovies", JSON.stringify(updatedLikedMovies));
+  };
+
+  return { likedMovies, toggleLike, removeLike };
 };

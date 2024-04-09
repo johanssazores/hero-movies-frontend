@@ -33,7 +33,15 @@ const Movie = ({ id }: any) => {
         ></p>
         <div className="mt-2 flex items-center justify-between">
           <button
-            onClick={() => toggleLike(movie.id, userId)}
+            onClick={() =>
+              toggleLike(
+                movie.id,
+                userId,
+                movie?.title,
+                movie?.description,
+                movie?.year
+              )
+            }
             className="text-indigo-600 text-2xl"
           >
             {likedMovies.some(
@@ -47,7 +55,7 @@ const Movie = ({ id }: any) => {
           </button>
         </div>
       </div>
-      <Button anchor={true} href="/movies">
+      <Button className="mt-10" anchor={true} href="/movies">
         Back
       </Button>
     </div>

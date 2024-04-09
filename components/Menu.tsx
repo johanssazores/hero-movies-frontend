@@ -1,5 +1,6 @@
 import React from "react";
 import Button from "@/components/Button";
+import Link from "next/link";
 import { signOut, useSession } from "next-auth/react";
 const Menu = () => {
   const { data: session }: any = useSession();
@@ -10,12 +11,18 @@ const Menu = () => {
       <ul className="flex items-center justify-end">
         {session ? (
           <>
-            <li className="px-2">
+            <li className="pr-4">
+              <Link href={"/movies"}>Movies</Link>
+            </li>
+            <li className="pr-4">
+              <Link href={"/my-list"}>My List</Link>
+            </li>
+            <li className="pl-2">
               <Button onClick={() => signOut()}>Logout</Button>
             </li>
           </>
         ) : (
-          <li className="px-2">
+          <li className="pl-2">
             <Button anchor={true} href="/">
               Login
             </Button>
